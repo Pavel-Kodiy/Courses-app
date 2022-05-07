@@ -5,6 +5,7 @@ import SearchBar from './components/SearchBar/SearchBar';
 import { useState } from 'react';
 import CreateCourse from '../CreateCourse/CreateCourse';
 
+//Main data
 export const mockedCoursesList = [
 	{
 		id: 'de5aaa59-90f5-4dbc-b8a9-aaf205c551ba',
@@ -42,6 +43,7 @@ export const mockedCoursesList = [
 	},
 ];
 
+//Information about authors
 export const mockedAuthorsList = [
 	{
 		id: '27cc3006-e93a-4748-8ca8-73d06aa93b6d',
@@ -61,6 +63,7 @@ export const mockedAuthorsList = [
 	},
 ];
 
+//Get authors id from mockedAuthorsList
 export function getAuthorsById(arr) {
 	const newArr = [];
 	for (let str of arr) {
@@ -74,6 +77,7 @@ export function getAuthorsById(arr) {
 	return newArr.join(', ');
 }
 
+//Converting time from hours to minutes
 export function getTimeFromMins(mins) {
 	let hours = Math.trunc(mins / 60);
 	let minutes = mins % 60;
@@ -81,9 +85,13 @@ export function getTimeFromMins(mins) {
 }
 
 const Courses = () => {
+	//Main state of data
 	const [data, setData] = useState(mockedCoursesList);
+
+	//State for search function
 	const [value, setValue] = useState('');
 
+	//Function for search courses from title or id
 	const filtredCourses = data.filter((course) => {
 		return (
 			course.title.toLowerCase().includes(value.toLowerCase()) ||
@@ -91,6 +99,7 @@ const Courses = () => {
 		);
 	});
 
+	//State for switch to course creation page
 	const [btnState, setBtnState] = useState(false);
 
 	return (

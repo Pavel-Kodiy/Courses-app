@@ -12,8 +12,10 @@ import { useState } from 'react';
 import CoursesCard from '../Courses/components/CourseCard/CoursesCard';
 import { v4 as uuidv4 } from 'uuid';
 
+//Empty object for creating new authors
 const courseAuthorsArray = [];
 
+//Empty object for creating new courses
 function getEmptyObj() {
 	const emptyObj = {
 		id: uuidv4(),
@@ -27,49 +29,24 @@ function getEmptyObj() {
 }
 
 const CreateCourse = (props) => {
+	//State for main data
 	const [objArr, setValue] = useState(mockedCoursesList);
+
+	//State for new empty object
 	const [obj, setObj] = useState(mockedCoursesList);
 
 	function add() {
-		setValue([...objArr, obj]); // добавление объекта к массиву
-		setObj(getEmptyObj()); // сохранение пустого объекта в стейт
+		setValue([...objArr, obj]); //Adding an object to an array
+		setObj(getEmptyObj()); //Saving an empty object to a state
 	}
 
 	function change(prop, event) {
-		// изменение свойства при вводе
+		//Property change on input
 		setObj({ ...obj, [prop]: event.target.value });
 	}
 
-	/*
-	function getFOO(arr) {
-		const newArr = [];
-		for (let str of arr) {
-			const arr = objArr;
-			for (let obj of arr) {
-				if (obj.id === str) {
-					newArr.push(obj.name);
-				}
-			}
-		}
-		return newArr.join(', ');
-	}
-
-	 	function foo() {
-		mockedCoursesList.push({
-			id: obj.id,
-			title: obj.title,
-			description: obj.description,
-			creationDate: '',
-			duration: obj.duration,
-			authors: obj.authors,
-		});
-	} */
-
 	const result = objArr.map((obj) => {
-		// вывод сохранённого массива объектов
-		{
-			console.log(obj.creationDate);
-		}
+		//Output of the stored array of objects
 
 		return (
 			<CoursesCard
@@ -83,9 +60,13 @@ const CreateCourse = (props) => {
 		);
 	});
 
+	//State for new authors
 	const [newAuthor, setNewAuthor] = useState(courseAuthorsArray);
 
+	//State for authors data
 	const [authorsArray, setAuthorsArray] = useState(mockedAuthorsList);
+
+	//State for created authors
 	const [createdAuthor, setCreatedAuthor] = useState([]);
 
 	return (
