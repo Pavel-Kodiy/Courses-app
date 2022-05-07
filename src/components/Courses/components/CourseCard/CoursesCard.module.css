@@ -1,0 +1,52 @@
+.wrapper {
+   display: flex;
+   justify-content: space-between;
+   padding: 10px;
+   font-size: 14px;
+   line-height: 1.4;
+   border: 1px solid teal;
+   margin-bottom: 20px;
+}
+
+.text {
+   width: 57%;
+   margin: 10px 0px;
+}
+
+.text h1 {
+   font-size: 24px;
+   margin-bottom: 10px;
+}
+
+.text p {
+   
+}
+
+.info {
+   width: 38%;
+   margin: 10px 0px;
+}
+
+.info strong {
+   display: inline-block;
+   margin-bottom: 10px;
+}
+
+.btnWrapp {
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.authors {
+
+}
+
+.duration {
+
+}
+
+.creationDate { 
+
+}

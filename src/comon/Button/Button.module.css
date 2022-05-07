@@ -1,0 +1,15 @@
+.myBtn {
+   padding: 3px 15px;
+   color: black;
+   font-size: 14px;
+   background-color: transparent;
+   border: 1px solid purple;
+   cursor: pointer;
+   height: 25px;
+   width: fit-content;
+}
+
+.myBtn:hover {
+   background-color: purple;
+   color: white;
+}

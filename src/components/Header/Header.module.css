@@ -1,0 +1,28 @@
+.myHeader {
+   width: 90%;
+   height: auto;
+   margin: 20px 0 10px 0;
+   padding: 10px 20px;
+   border: 1px solid red;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.btnWrapper {
+   display: flex;
+   text-align: center;
+   justify-content: center;
+}
+
+.userNameBox {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-right: 20px;
+}
+
+.userNameText {
+   font-size: 16px;
+   font-weight: 800;
+}

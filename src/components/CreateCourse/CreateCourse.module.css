@@ -1,0 +1,98 @@
+h3 {
+   font-size: 14px;
+   margin-bottom: 20px;
+   margin-top: 20px;
+}
+
+.wrapper {
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   margin-bottom: 20px;
+}
+
+.titleBox {
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 20px;
+   align-items: flex-end;
+}
+
+.title {
+   display: flex;
+   flex-direction: column;
+}
+
+.description {
+   display: flex;
+   margin-bottom: 20px;
+}
+
+.bottomBox {
+   border: 1px solid black;
+   padding: 10px;
+   margin-bottom: 20px;
+}
+
+.authorsSection {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 20px;
+}
+
+.addAuthor {
+   width: 50%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.createAuthorBtn {
+   margin-top: 20px;
+}
+
+.authorsList{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 50%;
+}
+
+.generateAuthorList {
+   width: 70%;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   font-size: 16px;
+   margin-bottom: 10px;
+}
+
+.bottomSection {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+}
+
+.duration {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 50%;
+}
+
+.counter {
+   width: 100%;
+   margin-top: 20px;
+   font-size: 18px;
+   display: flex;
+   justify-content: start;
+}
+
+.courseAuthors {
+   width: 50%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
