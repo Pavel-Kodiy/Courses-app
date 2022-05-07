@@ -64,10 +64,12 @@ export const mockedAuthorsList = [
 ];
 
 //Get authors id from mockedAuthorsList
-export function getAuthorsById(arr) {
+//todo use array methods map, filter
+//todo rename to getAuthorsByIds
+export function getAuthorsById(arr, authors) {
 	const newArr = [];
 	for (let str of arr) {
-		const arr = mockedAuthorsList;
+		const arr = authors;
 		for (let obj of arr) {
 			if (obj.id === str) {
 				newArr.push(obj.name);
@@ -86,26 +88,51 @@ export function getTimeFromMins(mins) {
 
 const Courses = () => {
 	//Main state of data
+	//todo rename
 	const [data, setData] = useState(mockedCoursesList);
+	const [searchInput, setSearchInput] = useState('');
 
+	const [btnState, setBtnState] = useState(false); //TODO rename to isCreating
 	//State for search function
 	const [value, setValue] = useState('');
 
+	const [authorList, setAuthorList] = useState(mockedAuthorsList);
+	const createAuthorHandle = (author) => {
+		setAuthorList([...authorList, author]);
+	};
+
+	const updateCourseList = (course) => {
+		setData([...data, course]);
+		setBtnState(false);
+	};
+
+	const handleSearch = () => {
+		setSearchInput(value);
+	};
+
+	const handleChange = (e) => {
+		setValue(e.target.value);
+	};
+
 	//Function for search courses from title or id
+	// todo use useMemo
 	const filtredCourses = data.filter((course) => {
 		return (
-			course.title.toLowerCase().includes(value.toLowerCase()) ||
-			course.id.toLowerCase().includes(value.toLowerCase())
+			course.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+			course.id.toLowerCase().includes(searchInput.toLowerCase())
 		);
 	});
 
 	//State for switch to course creation page
-	const [btnState, setBtnState] = useState(false);
 
 	return (
 		<div className={classes.wrapper}>
 			{btnState ? (
-				<CreateCourse />
+				<CreateCourse
+					authorList={authorList}
+					createAuthorHandle={createAuthorHandle}
+					updateCourseList={updateCourseList}
+				/>
 			) : (
 				<div>
 					<SearchBar
@@ -114,14 +141,14 @@ const Courses = () => {
 						id={'search'}
 						htmlFor={'search'}
 						labelText={null}
-						onChange={(e) => setValue(e.target.value)}
+						onChange={handleChange}
 						textBtn={'Add new course'}
 						text={'Search'}
 						onClickBtn={(e) => {
 							setBtnState(true);
 							console.log(btnState);
 						}}
-						onClickBtnInp={(e) => console.log('ERRRRORRR')}
+						onClickBtnInp={handleSearch}
 					/>
 					{filtredCourses.map((course) => (
 						<CoursesCard
@@ -129,7 +156,7 @@ const Courses = () => {
 							description={course.description}
 							creationDate={course.creationDate.replace(/[/]/g, '.')}
 							duration={getTimeFromMins(course.duration) + ' hours'}
-							authors={getAuthorsById(course.authors)}
+							authors={getAuthorsById(course.authors, authorList)}
 							key={course.id}
 						/>
 					))}
