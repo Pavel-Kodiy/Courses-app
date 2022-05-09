@@ -63,11 +63,25 @@ export const mockedAuthorsList = [
 	},
 ];
 
-//Get authors id from mockedAuthorsList
+//todo use array methods map, filter
+//todo rename to getAuthorsByIds
+/* export function getAuthorsById(arr, authors) {
+	const newArr = [];
+	for (let str of arr) {
+		const arr = authors;
+		for (let obj of arr) {
+			if (obj.id === str) {
+				newArr.push(obj.name);
+			}
+		}
+	}
+	return newArr.join(', ');
+} */
+
 export function getAuthorsByIds(arr, authors) {
 	const newArr = [];
 	arr.map((authorsIds) => {
-		mockedAuthorsList.filter((authorsData) => {
+		authors.filter((authorsData) => {
 			if (authorsData.id === authorsIds) {
 				return newArr.push(authorsData.name);
 			}
@@ -87,7 +101,7 @@ const Courses = () => {
 	//Main state of data
 	const [CoursesListData, setCoursesListData] = useState(mockedCoursesList);
 
-	//State for search function
+	//States for search function
 	const [inputValue, setInputValue] = useState('');
 	const [searchInput, setSearchInput] = useState('');
 
@@ -139,7 +153,7 @@ const Courses = () => {
 						id={'search'}
 						htmlFor={'search'}
 						labelText={null}
-						onChange={(e) => setInputValue(e.target.value)}
+						onChange={handleChange}
 						textBtn={'Add new course'}
 						text={'Search'}
 						onClickBtn={(e) => {

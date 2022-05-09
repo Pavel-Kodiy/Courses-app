@@ -11,6 +11,7 @@ import { useState } from 'react';
 import CoursesCard from '../Courses/components/CourseCard/CoursesCard';
 import { v4 as uuidv4 } from 'uuid';
 
+const courseAuthorsArray = [];
 //Empty object for creating new authors
 //todo make this a state value
 
@@ -48,7 +49,6 @@ const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
 	const [createdAuthor, setCreatedAuthor] = useState('');
 
 	/* const [courseAuthorsArray, setCourseAuthorsArray] = useState([]); */
-	const courseAuthorsArray = [];
 
 	const [newAuthor, setNewAuthor] = useState(courseAuthorsArray);
 
@@ -61,7 +61,6 @@ const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
 		});
 		updateCourseList(newAuthor);
 		// setValue([...objArr, obj]); //Adding an object to an array
-		// setObj(getNewCoursesList()); //Saving an empty object to a state
 	}
 
 	function change(prop, event) {
@@ -93,6 +92,7 @@ const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
 	/* const [newAuthor, setNewAuthor] = useState(courseAuthorsArray); */
 
 	//State for authors data
+	//todo make new authors a state
 	const [authorsArray, setAuthorsArray] = useState(mockedAuthorsList);
 
 	return (
