@@ -2,7 +2,6 @@ import Button from '../../comon/Button/Button';
 import Input from '../../comon/Input/Input';
 import TextArea from '../../comon/TextArea/TextArea';
 import {
-	getAuthorsById,
 	getTimeFromMins,
 	mockedAuthorsList,
 	mockedCoursesList,
@@ -13,31 +12,53 @@ import CoursesCard from '../Courses/components/CourseCard/CoursesCard';
 import { v4 as uuidv4 } from 'uuid';
 
 //Empty object for creating new authors
-const courseAuthorsArray = [];
+//todo make this a state value
 
 //Empty object for creating new courses
-function getEmptyObj() {
-	const emptyObj = {
+function getNewCoursesList({ title, description, duration, authors }) {
+	const newCourseList = {
 		id: uuidv4(),
-		title: '',
-		description: '',
-		creationDate: String(new Date()),
-		duration: '00:00',
-		authors: [],
+		title,
+		description,
+		creationDate: getcreationDate(new Date()),
+		duration,
+		authors,
 	};
-	return emptyObj;
+	return newCourseList;
 }
 
-const CreateCourse = (props) => {
+function getcreationDate(date) {
+	var today = new Date();
+	var dd = String(today.getDate()).padStart(2, '0');
+	var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+	var yyyy = today.getFullYear();
+
+	return (date = mm + '/' + dd + '/' + yyyy);
+}
+
+const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
 	//State for main data
 	const [objArr, setValue] = useState(mockedCoursesList);
 
 	//State for new empty object
-	const [obj, setObj] = useState(mockedCoursesList);
+	//todo name to inputValues, use changeHandle
+	const [obj, setObj] = useState({});
 
-	function add() {
-		setValue([...objArr, obj]); //Adding an object to an array
-		setObj(getEmptyObj()); //Saving an empty object to a state
+	//State for created authors
+	const [createdAuthor, setCreatedAuthor] = useState('');
+
+	const [courseAuthorsArray, setCourseAuthorsArray] = useState([]);
+
+	function showNewCoursesList() {
+		const newAuthor = getNewCoursesList({
+			title: obj.title,
+			description: obj.description,
+			duration: obj.duration,
+			authors: courseAuthorsArray.map(({ id }) => id),
+		});
+		updateCourseList(newAuthor);
+		// setValue([...objArr, obj]); //Adding an object to an array
+		// setObj(getNewCoursesList()); //Saving an empty object to a state
 	}
 
 	function change(prop, event) {
@@ -45,29 +66,31 @@ const CreateCourse = (props) => {
 		setObj({ ...obj, [prop]: event.target.value });
 	}
 
-	const result = objArr.map((obj) => {
-		//Output of the stored array of objects
+	const [inputValues, setInputValues] = useState({});
 
-		return (
-			<CoursesCard
-				title={obj.title}
-				description={obj.description}
-				duration={getTimeFromMins(obj.duration) + ' hours'}
-				authors={getAuthorsById(obj.authors)}
-				creationDate={obj.creationDate.replace(/[/]/g, '.')}
-				key={obj.id}
-			/>
-		);
-	});
+	const changeHandle = (event) => {
+		const { name, value } = event.target;
+		setInputValues({
+			...inputValues,
+			[name]: value,
+		});
+	};
+
+	const onAuthorCreate = () => {
+		createAuthorHandle({
+			id: uuidv4(),
+			name: createdAuthor,
+		});
+		setCreatedAuthor('');
+	};
+
+	const result = [];
 
 	//State for new authors
-	const [newAuthor, setNewAuthor] = useState(courseAuthorsArray);
+	/* const [newAuthor, setNewAuthor] = useState(courseAuthorsArray); */
 
 	//State for authors data
 	const [authorsArray, setAuthorsArray] = useState(mockedAuthorsList);
-
-	//State for created authors
-	const [createdAuthor, setCreatedAuthor] = useState([]);
 
 	return (
 		<div className={classes.wrapper}>
@@ -79,10 +102,11 @@ const CreateCourse = (props) => {
 						placeholder={'Enter title...'}
 						id={'title'}
 						labelText={'Title'}
+						name='title'
 						onChange={(event) => change('title', event)}
 					/>
 				</div>
-				<Button onClick={add} text={'Create course'} />
+				<Button onClick={showNewCoursesList} text={'Create course'} />
 			</div>
 			<div className={classes.description}>
 				<TextArea
@@ -97,52 +121,36 @@ const CreateCourse = (props) => {
 			<div className={classes.bottomBox}>
 				<div className={classes.authorsSection}>
 					<div className={classes.addAuthor}>
-						<h3>Add author</h3>
+						<h3>showNewCoursesList author</h3>
 						<Input
 							htmlFor={'author'}
 							type={'text'}
 							placeholder={'Enter author name...'}
 							id={'author'}
 							labelText={'Author name'}
+							value={createdAuthor}
 							onChange={(event) => {
 								change('authors', event);
 								setCreatedAuthor(event.target.value);
 							}}
 						/>
 						<div className={classes.createAuthorBtn}>
-							<Button
-								onClick={() => {
-									console.log(createdAuthor);
-									setAuthorsArray(
-										mockedAuthorsList.push({
-											id: uuidv4(),
-											name: createdAuthor,
-										})
-									);
-									console.log(mockedAuthorsList);
-								}}
-								text={'Create author'}
-							/>
+							<Button onClick={onAuthorCreate} text={'Create author'} />
 						</div>
 					</div>
 					<div className={classes.authorsList}>
 						<h3>Authors</h3>
-						{mockedAuthorsList.map((author) => (
-							<div key={uuidv4()} className={classes.generateAuthorList}>
+						{authorList.map((author) => (
+							<div key={author.id} className={classes.generateAuthorList}>
 								<p>{author.name}</p>
 								<Button
 									onClick={() => {
-										setNewAuthor(
+										setAuthorsArray(
 											courseAuthorsArray.push({
 												id: author.id,
 												name: author.name,
 											})
 										);
-										console.log(courseAuthorsArray);
-
-										console.log(mockedAuthorsList);
-
-										console.log(mockedCoursesList);
 									}}
 									text={'Add author'}
 								/>
@@ -186,7 +194,7 @@ const CreateCourse = (props) => {
 										);
 										console.log(index);
 										console.log(author);
-										setNewAuthor(courseAuthorsArray.splice(index, 1));
+										setAuthorsArray(courseAuthorsArray.splice(index, 1));
 									}}
 									text={'Delete author'}
 								/>
@@ -195,7 +203,6 @@ const CreateCourse = (props) => {
 					</div>
 				</div>
 			</div>
-			{result}
 		</div>
 	);
 };

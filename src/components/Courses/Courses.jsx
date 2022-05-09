@@ -64,16 +64,15 @@ export const mockedAuthorsList = [
 ];
 
 //Get authors id from mockedAuthorsList
-export function getAuthorsById(arr) {
+export function getAuthorsByIds(arr, authors) {
 	const newArr = [];
-	for (let str of arr) {
-		const arr = mockedAuthorsList;
-		for (let obj of arr) {
-			if (obj.id === str) {
-				newArr.push(obj.name);
+	arr.map((authorsIds) => {
+		mockedAuthorsList.filter((authorsData) => {
+			if (authorsData.id === authorsIds) {
+				return newArr.push(authorsData.name);
 			}
-		}
-	}
+		});
+	});
 	return newArr.join(', ');
 }
 
@@ -86,26 +85,52 @@ export function getTimeFromMins(mins) {
 
 const Courses = () => {
 	//Main state of data
-	const [data, setData] = useState(mockedCoursesList);
+	const [CoursesListData, setCoursesListData] = useState(mockedCoursesList);
 
 	//State for search function
-	const [value, setValue] = useState('');
+	const [inputValue, setInputValue] = useState('');
+	const [searchInput, setSearchInput] = useState('');
 
+	//State for switch to course creation page
+	const [isCreating, setIsCreating] = useState(false);
+
+	const [authorList, setAuthorList] = useState(mockedAuthorsList);
+
+	const createAuthorHandle = (author) => {
+		setAuthorList([...authorList, author]);
+		console.log(authorList);
+	};
+
+	const updateCourseList = (course) => {
+		setCoursesListData([...CoursesListData, course]);
+		setIsCreating(false);
+	};
+
+	const handleSearch = () => {
+		setSearchInput(inputValue);
+	};
+
+	const handleChange = (e) => {
+		setInputValue(e.target.value);
+	};
+
+	// TODO use useMemo
 	//Function for search courses from title or id
-	const filtredCourses = data.filter((course) => {
+	const filtredCourses = CoursesListData.filter((course) => {
 		return (
-			course.title.toLowerCase().includes(value.toLowerCase()) ||
-			course.id.toLowerCase().includes(value.toLowerCase())
+			course.title.toLowerCase().includes(inputValue.toLowerCase()) ||
+			course.id.toLowerCase().includes(inputValue.toLowerCase())
 		);
 	});
 
-	//State for switch to course creation page
-	const [btnState, setBtnState] = useState(false);
-
 	return (
 		<div className={classes.wrapper}>
-			{btnState ? (
-				<CreateCourse />
+			{isCreating ? (
+				<CreateCourse
+					authorList={authorList}
+					createAuthorHandle={createAuthorHandle}
+					updateCourseList={updateCourseList}
+				/>
 			) : (
 				<div>
 					<SearchBar
@@ -114,14 +139,13 @@ const Courses = () => {
 						id={'search'}
 						htmlFor={'search'}
 						labelText={null}
-						onChange={(e) => setValue(e.target.value)}
+						onChange={(e) => setInputValue(e.target.value)}
 						textBtn={'Add new course'}
 						text={'Search'}
 						onClickBtn={(e) => {
-							setBtnState(true);
-							console.log(btnState);
+							setIsCreating(true);
 						}}
-						onClickBtnInp={(e) => console.log('ERRRRORRR')}
+						onClickBtnInp={handleSearch}
 					/>
 					{filtredCourses.map((course) => (
 						<CoursesCard
@@ -129,7 +153,7 @@ const Courses = () => {
 							description={course.description}
 							creationDate={course.creationDate.replace(/[/]/g, '.')}
 							duration={getTimeFromMins(course.duration) + ' hours'}
-							authors={getAuthorsById(course.authors)}
+							authors={getAuthorsByIds(course.authors, authorList)}
 							key={course.id}
 						/>
 					))}
