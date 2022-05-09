@@ -118,8 +118,8 @@ const Courses = () => {
 	//Function for search courses from title or id
 	const filtredCourses = CoursesListData.filter((course) => {
 		return (
-			course.title.toLowerCase().includes(inputValue.toLowerCase()) ||
-			course.id.toLowerCase().includes(inputValue.toLowerCase())
+			course.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+			course.id.toLowerCase().includes(searchInput.toLowerCase())
 		);
 	});
 

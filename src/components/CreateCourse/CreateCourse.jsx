@@ -20,14 +20,14 @@ function getNewCoursesList({ title, description, duration, authors }) {
 		id: uuidv4(),
 		title,
 		description,
-		creationDate: getcreationDate(new Date()),
+		creationDate: getCreationDate(new Date()),
 		duration,
 		authors,
 	};
 	return newCourseList;
 }
 
-function getcreationDate(date) {
+function getCreationDate(date) {
 	var today = new Date();
 	var dd = String(today.getDate()).padStart(2, '0');
 	var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -47,7 +47,10 @@ const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
 	//State for created authors
 	const [createdAuthor, setCreatedAuthor] = useState('');
 
-	const [courseAuthorsArray, setCourseAuthorsArray] = useState([]);
+	/* const [courseAuthorsArray, setCourseAuthorsArray] = useState([]); */
+	const courseAuthorsArray = [];
+
+	const [newAuthor, setNewAuthor] = useState(courseAuthorsArray);
 
 	function showNewCoursesList() {
 		const newAuthor = getNewCoursesList({
@@ -203,6 +206,7 @@ const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
 					</div>
 				</div>
 			</div>
+			{result}
 		</div>
 	);
 };
