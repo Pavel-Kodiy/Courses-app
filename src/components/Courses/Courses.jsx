@@ -2,7 +2,7 @@ import CoursesCard from './components/CourseCard/CoursesCard';
 import classes from './Courses.module.css';
 import TruncateString from 'react-truncate-string';
 import SearchBar from './components/SearchBar/SearchBar';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import CreateCourse from '../CreateCourse/CreateCourse';
 
 //Main data
@@ -63,21 +63,6 @@ export const mockedAuthorsList = [
 	},
 ];
 
-//todo use array methods map, filter
-//todo rename to getAuthorsByIds
-/* export function getAuthorsById(arr, authors) {
-	const newArr = [];
-	for (let str of arr) {
-		const arr = authors;
-		for (let obj of arr) {
-			if (obj.id === str) {
-				newArr.push(obj.name);
-			}
-		}
-	}
-	return newArr.join(', ');
-} */
-
 export function getAuthorsByIds(arr, authors) {
 	const newArr = [];
 	arr.map((authorsIds) => {
@@ -128,14 +113,16 @@ const Courses = () => {
 		setInputValue(e.target.value);
 	};
 
-	// TODO use useMemo
 	//Function for search courses from title or id
-	const filtredCourses = CoursesListData.filter((course) => {
-		return (
-			course.title.toLowerCase().includes(searchInput.toLowerCase()) ||
-			course.id.toLowerCase().includes(searchInput.toLowerCase())
-		);
-	});
+	const filtredCourses = useMemo(() => {
+		console.log('work');
+		return CoursesListData.filter((course) => {
+			return (
+				course.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+				course.id.toLowerCase().includes(searchInput.toLowerCase())
+			);
+		});
+	}, [searchInput]);
 
 	return (
 		<div className={classes.wrapper}>
