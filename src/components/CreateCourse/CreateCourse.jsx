@@ -27,7 +27,7 @@ function getCreationDate(date) {
 	var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 	var yyyy = today.getFullYear();
 
-	return (date = mm + '/' + dd + '/' + yyyy);
+	return (date = dd + '/' + mm + '/' + yyyy);
 }
 
 const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {

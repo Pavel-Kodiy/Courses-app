@@ -1,6 +1,6 @@
 .wrapper {
    width: 90%;
-   border: 1px solid lightblue;
+   /* border: 1px solid lightblue; */
    display: flex;
    align-items: center;
    justify-content: center;

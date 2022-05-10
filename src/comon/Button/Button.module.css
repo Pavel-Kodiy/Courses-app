@@ -3,13 +3,16 @@
    color: black;
    font-size: 14px;
    background-color: transparent;
-   border: 1px solid purple;
+   background-color: #F68E4F;
+   color: white;
+   border-radius: 5px;
    cursor: pointer;
-   height: 25px;
+   height: auto;
    width: fit-content;
+   transition-duration: 0.3s;
 }
 
 .myBtn:hover {
-   background-color: purple;
-   color: white;
+   background-color: #40C8C2;
+   color: #3785B7;
 }

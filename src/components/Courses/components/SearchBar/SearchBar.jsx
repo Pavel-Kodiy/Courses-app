@@ -6,14 +6,16 @@ const SearchBar = (props) => {
 	return (
 		<div className={classes.wrapper}>
 			<div className={classes.searchWrap}>
-				<Input
-					type={props.type}
-					placeholder={props.placeholder}
-					id={props.id}
-					htmlFor={props.htmlFor}
-					labelText={props.labelText}
-					onChange={props.onChange}
-				/>
+				<div className={classes.inputWrap}>
+					<Input
+						type={props.type}
+						placeholder={props.placeholder}
+						id={props.id}
+						htmlFor={props.htmlFor}
+						labelText={props.labelText}
+						onChange={props.onChange}
+					/>
+				</div>
 				<Button onClick={props.onClickBtnInp} text={props.text} />
 			</div>
 			<div>
