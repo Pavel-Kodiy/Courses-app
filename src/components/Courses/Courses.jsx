@@ -72,7 +72,7 @@ export function getAuthorsByIds(arr, authors) {
 			}
 		});
 	});
-	return newArr.join(', ');
+	return <TruncateString text={newArr.join(', ')} truncateAt={100} />;
 }
 
 //Converting time from hours to minutes
@@ -115,14 +115,13 @@ const Courses = () => {
 
 	//Function for search courses from title or id
 	const filtredCourses = useMemo(() => {
-		console.log('work');
 		return CoursesListData.filter((course) => {
 			return (
 				course.title.toLowerCase().includes(searchInput.toLowerCase()) ||
 				course.id.toLowerCase().includes(searchInput.toLowerCase())
 			);
 		});
-	}, [searchInput]);
+	}, [searchInput, CoursesListData]);
 
 	return (
 		<div className={classes.wrapper}>

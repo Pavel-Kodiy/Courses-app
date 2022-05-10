@@ -10,10 +10,10 @@ const CoursesCard = (props) => {
 			</div>
 			<div className={classses.info}>
 				<div className={classses.authors}>
-					<p>
-						<strong>Authors:&nbsp;</strong>
+					<div style={{ display: 'flex' }}>
+						<strong style={{ display: 'block' }}>Authors:&nbsp;</strong>
 						{props.authors}
-					</p>
+					</div>
 				</div>
 				<div className={classses.duration}>
 					<p>

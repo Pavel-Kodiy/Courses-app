@@ -1,19 +1,12 @@
 import Button from '../../comon/Button/Button';
 import Input from '../../comon/Input/Input';
 import TextArea from '../../comon/TextArea/TextArea';
-import {
-	getTimeFromMins,
-	mockedAuthorsList,
-	mockedCoursesList,
-} from '../Courses/Courses';
+import { getTimeFromMins, mockedAuthorsList } from '../Courses/Courses';
 import classes from './CreateCourse.module.css';
 import { useState } from 'react';
-import CoursesCard from '../Courses/components/CourseCard/CoursesCard';
 import { v4 as uuidv4 } from 'uuid';
 
 const courseAuthorsArray = [];
-//Empty object for creating new authors
-//todo make this a state value
 
 //Empty object for creating new courses
 function getNewCoursesList({ title, description, duration, authors }) {
@@ -38,29 +31,34 @@ function getCreationDate(date) {
 }
 
 const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
-	//State for main data
-	const [objArr, setValue] = useState(mockedCoursesList);
-
 	//State for new empty object
-	//todo name to inputValues, use changeHandle
 	const [obj, setObj] = useState({});
 
 	//State for created authors
 	const [createdAuthor, setCreatedAuthor] = useState('');
 
-	/* const [courseAuthorsArray, setCourseAuthorsArray] = useState([]); */
-
-	const [newAuthor, setNewAuthor] = useState(courseAuthorsArray);
+	//State for new course
+	let [newCourse, setNewCourse] = useState(courseAuthorsArray);
 
 	function showNewCoursesList() {
-		const newAuthor = getNewCoursesList({
-			title: obj.title,
-			description: obj.description,
-			duration: obj.duration,
-			authors: courseAuthorsArray.map(({ id }) => id),
-		});
-		updateCourseList(newAuthor);
-		// setValue([...objArr, obj]); //Adding an object to an array
+		if (
+			obj.title === undefined ||
+			obj.title.length < 2 ||
+			obj.description === undefined ||
+			obj.description.length < 2 ||
+			obj.duration <= 0 ||
+			obj.duration === undefined
+		) {
+			return alert('Please, fill in all fields.');
+		} else {
+			newCourse = getNewCoursesList({
+				title: obj.title,
+				description: obj.description,
+				duration: obj.duration,
+				authors: courseAuthorsArray.map(({ id }) => id),
+			});
+			updateCourseList(newCourse);
+		}
 	}
 
 	function change(prop, event) {
@@ -87,9 +85,6 @@ const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
 	};
 
 	const result = [];
-
-	//State for new authors
-	/* const [newAuthor, setNewAuthor] = useState(courseAuthorsArray); */
 
 	//State for authors data
 	//todo make new authors a state
