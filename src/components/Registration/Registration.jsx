@@ -9,7 +9,10 @@ const Regisrtation = (props) => {
 			<Header />
 			<div className={classes.registrationWrap}>
 				<div className={classes.registrationBox}>
-					<h1>Registration</h1>
+					<div className={classes.title}>
+						<h1>Registration</h1>
+					</div>
+
 					<div className={classes.name}>
 						<Input
 							htmlFor={'name'}
@@ -34,7 +37,7 @@ const Regisrtation = (props) => {
 						<Input
 							htmlFor={'password'}
 							labelText={'Password'}
-							type={'text'}
+							type={'password'}
 							placeholder={'Enter password'}
 							id={''}
 							name={'password'}
