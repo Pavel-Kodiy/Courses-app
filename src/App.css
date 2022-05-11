@@ -39,10 +39,15 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 
 .wrapper {
    width: 100%;
-   height: auto;
+   height: 100%;
    display: flex;
    flex-direction: column;
    align-items: center;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	
+}
+
+#root {
+	height: 100%;
+	width: 100%;
 }

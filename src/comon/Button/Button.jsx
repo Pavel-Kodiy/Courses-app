@@ -7,9 +7,10 @@ const Button = (props) => {
 	// 	classes.myBt: true,
 	// 	classes.red: type === 'red'
 	// })
+	const { onClick, text } = props;
 	return (
-		<button onClick={props.onClick} className={classes.myBtn}>
-			{props.text}
+		<button onClick={onClick} className={classes.myBtn}>
+			{text}
 		</button>
 	);
 };

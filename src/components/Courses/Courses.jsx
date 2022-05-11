@@ -4,6 +4,7 @@ import TruncateString from 'react-truncate-string';
 import SearchBar from './components/SearchBar/SearchBar';
 import { useMemo, useState } from 'react';
 import CreateCourse from '../CreateCourse/CreateCourse';
+import Regisrtation from '../Registration/Registration';
 
 //Main data
 export const mockedCoursesList = [

@@ -3,23 +3,36 @@ import Input from '../../../../comon/Input/Input';
 import classes from './SearchBar.module.css';
 
 const SearchBar = (props) => {
+	const {
+		type,
+		placeholder,
+		id,
+		htmlFor,
+		labelText,
+		onChange,
+		onClickBtnInp,
+		text,
+		onClickBtn,
+		textBtn,
+	} = props;
+
 	return (
 		<div className={classes.wrapper}>
 			<div className={classes.searchWrap}>
 				<div className={classes.inputWrap}>
 					<Input
-						type={props.type}
-						placeholder={props.placeholder}
-						id={props.id}
-						htmlFor={props.htmlFor}
-						labelText={props.labelText}
-						onChange={props.onChange}
+						type={type}
+						placeholder={placeholder}
+						id={id}
+						htmlFor={htmlFor}
+						labelText={labelText}
+						onChange={onChange}
 					/>
 				</div>
-				<Button onClick={props.onClickBtnInp} text={props.text} />
+				<Button onClick={onClickBtnInp} text={text} />
 			</div>
 			<div>
-				<Button onClick={props.onClickBtn} text={props.textBtn} />
+				<Button onClick={onClickBtn} text={textBtn} />
 			</div>
 		</div>
 	);

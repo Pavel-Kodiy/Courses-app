@@ -1,16 +1,19 @@
 import classes from './TextArea.module.css';
 
 const TextArea = (props) => {
+	const { htmlFor, labelText, rows, cols, type, placeholder, id, onChange } =
+		props;
+
 	return (
 		<div className={classes.wrapper}>
-			<label htmlFor={props.htmlFor}>{props.labelText}</label>
+			<label htmlFor={htmlFor}>{labelText}</label>
 			<textarea
-				rows={props.rows}
-				cols={props.cols}
-				type={props.type}
-				placeholder={props.placeholder}
-				id={props.id}
-				onChange={props.onChange}
+				rows={rows}
+				cols={cols}
+				type={type}
+				placeholder={placeholder}
+				id={id}
+				onChange={onChange}
 			/>
 		</div>
 	);
