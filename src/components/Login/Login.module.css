@@ -8,7 +8,7 @@
    min-height: 100%;
 }
 
-.registrationWrap {
+.loginWrap {
    width: 90%;
    height: 100%;
    display: flex;
@@ -18,7 +18,7 @@
    margin-top: 10px;
 }
 
-.registrationBox {
+.loginBox {
    width: 320px;
    background-color: #3785B7;
    border-radius: 10px;
@@ -46,7 +46,7 @@
    padding: 0 10px;
 }
 
-.regisrationBtn {
+.loginBtn {
    margin-bottom: 10px;
    display: flex;
    justify-content: center;

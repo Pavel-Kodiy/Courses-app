@@ -1,27 +1,16 @@
 import Button from '../../comon/Button/Button';
 import Input from '../../comon/Input/Input';
 import Header from '../Header/Header';
-import classes from './Registration.module.css';
+import classes from './Login.module.css';
 
-const Regisrtation = (props) => {
+const Login = () => {
 	return (
 		<div className={classes.wrapper}>
 			<Header />
-			<div className={classes.registrationWrap}>
-				<div className={classes.registrationBox}>
+			<div className={classes.loginWrap}>
+				<div className={classes.loginBox}>
 					<div className={classes.title}>
-						<h1>Registration</h1>
-					</div>
-
-					<div className={classes.name}>
-						<Input
-							htmlFor={'name'}
-							labelText={'Name'}
-							type={'text'}
-							placeholder={'Enter name'}
-							id={''}
-							name={'name'}
-						/>
+						<h1>Login</h1>
 					</div>
 					<div className={classes.email}>
 						<Input
@@ -43,17 +32,17 @@ const Regisrtation = (props) => {
 							name={'password'}
 						/>
 					</div>
-					<div className={classes.regisrationBtn}>
+					<div className={classes.loginBtn}>
 						<Button
 							onClick={(e) => {
 								console.log(e.target.value);
 							}}
-							text={'Registration'}
+							text={'Login'}
 						/>
 					</div>
 					<div className={classes.infoText}>
 						<p>
-							If you have an account you can <a>Login</a>
+							If you not have an account you can <a>Registration</a>
 						</p>
 					</div>
 				</div>
@@ -62,4 +51,4 @@ const Regisrtation = (props) => {
 	);
 };
 
-export default Regisrtation;
+export default Login;

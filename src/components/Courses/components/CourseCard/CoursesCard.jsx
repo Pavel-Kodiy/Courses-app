@@ -1,35 +1,35 @@
 import Button from '../../../../comon/Button/Button';
-import classses from './CoursesCard.module.css';
+import classes from './CoursesCard.module.css';
 
 const CoursesCard = (props) => {
 	const { title, description, authors, duration, creationDate } = props;
 
 	return (
-		<div className={classses.wrapper}>
-			<div className={classses.text}>
+		<div className={classes.wrapper}>
+			<div className={classes.text}>
 				<h1>{title}</h1>
 				<p>{description}</p>
 			</div>
-			<div className={classses.info}>
-				<div className={classses.authors}>
+			<div className={classes.info}>
+				<div className={classes.authors}>
 					<div style={{ display: 'flex' }}>
 						<strong style={{ display: 'block' }}>Authors:&nbsp;</strong>
 						{authors}
 					</div>
 				</div>
-				<div className={classses.duration}>
+				<div className={classes.duration}>
 					<p>
 						<strong>Duration:&nbsp;</strong>
 						{duration}
 					</p>
 				</div>
-				<div className={classses.creationDate}>
+				<div className={classes.creationDate}>
 					<p>
 						<strong> Created:&nbsp;</strong>
 						{creationDate}
 					</p>
 				</div>
-				<div className={classses.btnWrapp}>
+				<div className={classes.btnWrapp}>
 					<Button text={'Show course'} />
 				</div>
 			</div>
