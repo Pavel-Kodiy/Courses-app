@@ -1,9 +1,60 @@
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../comon/Button/Button';
 import Input from '../../comon/Input/Input';
 import Header from '../Header/Header';
 import classes from './Registration.module.css';
+import axios from 'axios';
+import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
-const Regisrtation = (props) => {
+const Regisrtation = () => {
+	const [inputValues, setInputValues] = useState({});
+
+	const navigate = useNavigate();
+
+	const newUser = {
+		name: inputValues.name,
+		password: inputValues.password,
+		email: inputValues.email,
+	};
+
+	const changeHandle = (event) => {
+		const { name, value } = event.target;
+		setInputValues({
+			...inputValues,
+			[name]: value,
+		});
+	};
+
+	async function fetchUser() {
+		const response = await fetch('http://localhost:3000/register', {
+			method: 'POST',
+			body: JSON.stringify(newUser),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+		const result = await response.json();
+		console.log(result);
+		if (result.successful === true) {
+			console.log('successful');
+			return navigate('/login');
+		}
+		console.log('errrror');
+	}
+
+	//TODO Doesn't work with axios
+	async function axiosUser() {
+		const response = await axios('http://localhost:3000/register', {
+			method: 'POST',
+			body: JSON.stringify(newUser),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+		console.log(response.data);
+	}
+
 	return (
 		<div className={classes.wrapper}>
 			<Header />
@@ -19,8 +70,8 @@ const Regisrtation = (props) => {
 							labelText={'Name'}
 							type={'text'}
 							placeholder={'Enter name'}
-							id={''}
 							name={'name'}
+							onChange={(event) => changeHandle(event)}
 						/>
 					</div>
 					<div className={classes.email}>
@@ -29,8 +80,8 @@ const Regisrtation = (props) => {
 							labelText={'Email'}
 							type={'email'}
 							placeholder={'Enter email'}
-							id={''}
 							name={'email'}
+							onChange={(event) => changeHandle(event)}
 						/>
 					</div>
 					<div className={classes.password}>
@@ -39,21 +90,22 @@ const Regisrtation = (props) => {
 							labelText={'Password'}
 							type={'password'}
 							placeholder={'Enter password'}
-							id={''}
 							name={'password'}
+							onChange={(event) => changeHandle(event)}
 						/>
 					</div>
 					<div className={classes.regisrationBtn}>
 						<Button
-							onClick={(e) => {
-								console.log(e.target.value);
+							onClick={() => {
+								console.log(newUser);
+								fetchUser();
 							}}
 							text={'Registration'}
 						/>
 					</div>
 					<div className={classes.infoText}>
 						<p>
-							If you have an account you can <a>Login</a>
+							If you have an account you can <Link to='/login'>Login</Link>
 						</p>
 					</div>
 				</div>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Button from '../../comon/Button/Button';
 import Input from '../../comon/Input/Input';
 import Header from '../Header/Header';
@@ -18,7 +19,6 @@ const Login = () => {
 							labelText={'Email'}
 							type={'email'}
 							placeholder={'Enter email'}
-							id={''}
 							name={'email'}
 						/>
 					</div>
@@ -28,7 +28,6 @@ const Login = () => {
 							labelText={'Password'}
 							type={'password'}
 							placeholder={'Enter password'}
-							id={''}
 							name={'password'}
 						/>
 					</div>
@@ -42,7 +41,8 @@ const Login = () => {
 					</div>
 					<div className={classes.infoText}>
 						<p>
-							If you not have an account you can <a>Registration</a>
+							If you not have an account you can{' '}
+							<Link to='/registration'>Registration</Link>
 						</p>
 					</div>
 				</div>
