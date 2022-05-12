@@ -78,8 +78,6 @@ const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
 
 	const result = [];
 
-	//State for authors data
-	//todo make new authors a state
 	const [authorsArray, setAuthorsArray] = useState(mockedAuthorsList);
 
 	return (

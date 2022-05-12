@@ -5,7 +5,6 @@ import Header from '../Header/Header';
 import classes from './Registration.module.css';
 import axios from 'axios';
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
 
 const Regisrtation = () => {
 	const [inputValues, setInputValues] = useState({});
@@ -57,7 +56,6 @@ const Regisrtation = () => {
 
 	return (
 		<div className={classes.wrapper}>
-			<Header />
 			<div className={classes.registrationWrap}>
 				<div className={classes.registrationBox}>
 					<div className={classes.title}>
