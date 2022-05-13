@@ -31,9 +31,6 @@ function getCreationDate(date) {
 }
 
 const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
-	//State for new empty object
-	const [obj, setObj] = useState({});
-
 	//State for created authors
 	const [createdAuthor, setCreatedAuthor] = useState('');
 
@@ -42,28 +39,23 @@ const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
 
 	function showNewCoursesList() {
 		if (
-			obj.title === undefined ||
-			obj.title.length < 2 ||
-			obj.description === undefined ||
-			obj.description.length < 2 ||
-			obj.duration <= 0 ||
-			obj.duration === undefined
+			inputValues.title.length < 2 ||
+			inputValues.description === undefined ||
+			inputValues.description.length < 2 ||
+			inputValues.title === undefined ||
+			inputValues.duration <= 0 ||
+			inputValues.duration === undefined
 		) {
 			return alert('Please, fill in all fields.');
 		} else {
 			newCourse = getNewCoursesList({
-				title: obj.title,
-				description: obj.description,
-				duration: obj.duration,
+				title: inputValues.title,
+				description: inputValues.description,
+				duration: inputValues.duration,
 				authors: courseAuthorsArray.map(({ id }) => id),
 			});
 			updateCourseList(newCourse);
 		}
-	}
-
-	function change(prop, event) {
-		//Property change on input
-		setObj({ ...obj, [prop]: event.target.value });
 	}
 
 	const [inputValues, setInputValues] = useState({});
@@ -86,8 +78,6 @@ const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
 
 	const result = [];
 
-	//State for authors data
-	//todo make new authors a state
 	const [authorsArray, setAuthorsArray] = useState(mockedAuthorsList);
 
 	return (
@@ -100,8 +90,8 @@ const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
 						placeholder={'Enter title...'}
 						id={'title'}
 						labelText={'Title'}
-						name='title'
-						onChange={(event) => change('title', event)}
+						name={'title'}
+						onChange={(event) => changeHandle(event)}
 					/>
 				</div>
 				<Button onClick={showNewCoursesList} text={'Create course'} />
@@ -113,7 +103,8 @@ const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
 					placeholder={'Enter description...'}
 					id={'description'}
 					labelText={'Description'}
-					onChange={(event) => change('description', event)}
+					name={'description'}
+					onChange={(event) => changeHandle(event)}
 				/>
 			</div>
 			<div className={classes.bottomBox}>
@@ -121,14 +112,15 @@ const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
 					<div className={classes.addAuthor}>
 						<h3>showNewCoursesList author</h3>
 						<Input
-							htmlFor={'author'}
+							htmlFor={'authors'}
 							type={'text'}
 							placeholder={'Enter author name...'}
-							id={'author'}
+							id={'authors'}
 							labelText={'Author name'}
 							value={createdAuthor}
+							name={'authors'}
 							onChange={(event) => {
-								change('authors', event);
+								changeHandle(event);
 								setCreatedAuthor(event.target.value);
 							}}
 						/>
@@ -165,8 +157,9 @@ const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
 							placeholder={'Enter duration in minutes...'}
 							id={'duration'}
 							labelText={'Duration'}
+							name={'duration'}
 							onChange={(event) => {
-								change('duration', event);
+								changeHandle(event);
 								getTimeFromMins(event.target.value);
 							}}
 						/>
@@ -174,7 +167,9 @@ const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
 							<p>
 								Duration:{' '}
 								<span>
-									{obj.duration > 0 ? getTimeFromMins(obj.duration) : '00:00'}
+									{inputValues.duration > 0
+										? getTimeFromMins(inputValues.duration)
+										: '00:00'}
 								</span>{' '}
 								hours
 							</p>

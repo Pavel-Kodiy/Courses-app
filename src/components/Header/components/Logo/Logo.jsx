@@ -1,4 +1,4 @@
-const Logo = (props) => {
+const Logo = () => {
 	return (
 		<div>
 			<img

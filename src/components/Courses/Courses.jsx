@@ -2,8 +2,10 @@ import CoursesCard from './components/CourseCard/CoursesCard';
 import classes from './Courses.module.css';
 import TruncateString from 'react-truncate-string';
 import SearchBar from './components/SearchBar/SearchBar';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import CreateCourse from '../CreateCourse/CreateCourse';
+import Regisrtation from '../Registration/Registration';
+import { useNavigate } from 'react-router-dom';
 
 //Main data
 export const mockedCoursesList = [
@@ -94,6 +96,14 @@ const Courses = () => {
 	const [isCreating, setIsCreating] = useState(false);
 
 	const [authorList, setAuthorList] = useState(mockedAuthorsList);
+
+	const navigate = useNavigate();
+
+	/* const goToRegistration = useEffect(() => {
+		if (isCreating) {
+			navigate('/courses/add');
+		}
+	}, [isCreating, setIsCreating, navigate]); */
 
 	const createAuthorHandle = (author) => {
 		setAuthorList([...authorList, author]);
