@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './components/Header/Header';
 import './App.css';
 import Courses from './components/Courses/Courses';
-import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Regisrtation from './components/Registration/Registration';
 import Login from './components/Login/Login';
 import CreateCourse from './components/CreateCourse/CreateCourse';

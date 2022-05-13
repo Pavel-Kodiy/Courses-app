@@ -159,6 +159,7 @@ const Courses = () => {
 					/>
 					{filtredCourses.map((course) => (
 						<CoursesCard
+							id={course.id}
 							title={course.title}
 							description={course.description}
 							creationDate={course.creationDate.replace(/[/]/g, '.')}
