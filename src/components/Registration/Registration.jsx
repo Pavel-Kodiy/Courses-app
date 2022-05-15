@@ -44,9 +44,10 @@ const Regisrtation = () => {
 
 	//TODO Doesn't work with axios
 	async function axiosUser() {
-		const response = await axios('http://localhost:3000/register', {
+		const response = await axios({
+			url: 'http://localhost:3000/register',
 			method: 'POST',
-			body: JSON.stringify(newUser),
+			data: newUser,
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -96,7 +97,7 @@ const Regisrtation = () => {
 						<Button
 							onClick={() => {
 								console.log(newUser);
-								fetchUser();
+								axiosUser();
 							}}
 							text={'Registration'}
 						/>
