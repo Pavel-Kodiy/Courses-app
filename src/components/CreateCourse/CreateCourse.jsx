@@ -38,13 +38,15 @@ const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
 	let [newCourse, setNewCourse] = useState(courseAuthorsArray);
 
 	function showNewCoursesList() {
+		//todo create validation function validateFields(fields) => true || false
+		//todo use destr
 		if (
 			inputValues.title.length < 2 ||
-			inputValues.description === undefined ||
+			!inputValues.description ||
 			inputValues.description.length < 2 ||
-			inputValues.title === undefined ||
+			!inputValues.title ||
 			inputValues.duration <= 0 ||
-			inputValues.duration === undefined
+			!inputValues.duration
 		) {
 			return alert('Please, fill in all fields.');
 		} else {
