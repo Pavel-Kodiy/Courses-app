@@ -25,33 +25,23 @@ const Regisrtation = () => {
 		});
 	};
 
-	async function fetchUser() {
-		const response = await fetch('http://localhost:3000/register', {
+	async function axiosUser() {
+		const response = await axios({
+			url: 'http://localhost:3000/register',
 			method: 'POST',
-			body: JSON.stringify(newUser),
+			data: newUser,
 			headers: {
 				'Content-Type': 'application/json',
 			},
 		});
-		const result = await response.json();
+		console.log(response.data);
+		const result = await response.data;
 		console.log(result);
 		if (result.successful === true) {
 			console.log('successful');
 			return navigate('/login');
 		}
 		console.log('errrror');
-	}
-
-	//TODO Doesn't work with axios
-	async function axiosUser() {
-		const response = await axios('http://localhost:3000/register', {
-			method: 'POST',
-			body: JSON.stringify(newUser),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
-		console.log(response.data);
 	}
 
 	return (
@@ -96,7 +86,7 @@ const Regisrtation = () => {
 						<Button
 							onClick={() => {
 								console.log(newUser);
-								fetchUser();
+								axiosUser();
 							}}
 							text={'Registration'}
 						/>

@@ -40,11 +40,11 @@ const CreateCourse = ({ createAuthorHandle, authorList, updateCourseList }) => {
 	function showNewCoursesList() {
 		if (
 			inputValues.title.length < 2 ||
-			inputValues.description === undefined ||
+			!inputValues.description ||
 			inputValues.description.length < 2 ||
-			inputValues.title === undefined ||
+			!inputValues.title ||
 			inputValues.duration <= 0 ||
-			inputValues.duration === undefined
+			!inputValues.duration
 		) {
 			return alert('Please, fill in all fields.');
 		} else {

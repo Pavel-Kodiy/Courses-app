@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../comon/Button/Button';
@@ -24,16 +25,17 @@ const Login = () => {
 		});
 	};
 
-	async function fetchUser() {
-		const response = await fetch('http://localhost:3000/login', {
+	async function axiosUser() {
+		const response = await axios({
+			url: 'http://localhost:3000/login',
 			method: 'POST',
-			body: JSON.stringify(User),
+			data: User,
 			headers: {
 				'Content-Type': 'application/json',
 			},
 		});
 
-		const result = await response.json();
+		const result = await response.data;
 		console.log(result);
 		if (result.successful === true) {
 			console.log('successful');
@@ -73,7 +75,7 @@ const Login = () => {
 						/>
 					</div>
 					<div className={classes.loginBtn}>
-						<Button onClick={fetchUser} text={'Login'} />
+						<Button onClick={axiosUser} text={'Login'} />
 					</div>
 					<div className={classes.infoText}>
 						<p>

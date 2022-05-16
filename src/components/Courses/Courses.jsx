@@ -99,12 +99,6 @@ const Courses = () => {
 
 	const navigate = useNavigate();
 
-	/* const goToRegistration = useEffect(() => {
-		if (isCreating) {
-			navigate('/courses/add');
-		}
-	}, [isCreating, setIsCreating, navigate]); */
-
 	const createAuthorHandle = (author) => {
 		setAuthorList([...authorList, author]);
 		console.log(authorList);
@@ -166,6 +160,7 @@ const Courses = () => {
 							duration={getTimeFromMins(course.duration) + ' hours'}
 							authors={getAuthorsByIds(course.authors, authorList)}
 							key={course.id}
+							authorList={authorList}
 						/>
 					))}
 				</div>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Button from '../../../../comon/Button/Button';
 import Input from '../../../../comon/Input/Input';
 import classes from './SearchBar.module.css';

@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../../../comon/Button/Button';
+import CourseInfo from '../../../CourseInfo/CourseInfo';
 import classes from './CoursesCard.module.css';
 
 const CoursesCard = (props) => {
-	const { id, title, description, authors, duration, creationDate } = props;
-
-	const [showCourse, setShowCourse] = useState(false);
+	const {
+		id,
+		title,
+		description,
+		authors,
+		duration,
+		creationDate,
+		authorList,
+	} = props;
 	const navigate = useNavigate();
-
-	const goToRegistration = useEffect(() => {
-		if (showCourse) {
-			navigate(`/courses/:${id}`);
-		}
-	}, [showCourse, setShowCourse, navigate]);
 
 	return (
 		<div className={classes.wrapper}>
@@ -44,8 +44,7 @@ const CoursesCard = (props) => {
 					<Button
 						text={'Show course'}
 						onClick={() => {
-							setShowCourse(true);
-							goToRegistration();
+							navigate(`/courses/${id}`);
 						}}
 					/>
 				</div>

@@ -1,18 +1,11 @@
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../comon/Button/Button';
 import Logo from './components/Logo/Logo';
 import classes from './Header.module.css';
 
 const Header = () => {
-	const [logout, setLogout] = useState(false);
 	const navigate = useNavigate();
 
-	const goToRegistration = useEffect(() => {
-		if (logout) {
-			navigate('/registration');
-		}
-	}, [logout, setLogout, navigate]);
 	return (
 		<header className={classes.myHeader}>
 			<Logo />
@@ -23,9 +16,8 @@ const Header = () => {
 				<Button
 					text={'Logout'}
 					onClick={() => {
-						setLogout(true);
 						localStorage.clear();
-						goToRegistration();
+						navigate('/registration');
 					}}
 				/>
 			</div>
