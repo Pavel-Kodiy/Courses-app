@@ -32,6 +32,7 @@ const Login = () => {
 				'Content-Type': 'application/json',
 			},
 		});
+
 		const result = await response.json();
 		console.log(result);
 		if (result.successful === true) {

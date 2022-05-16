@@ -23,7 +23,7 @@ const CourseInfo = (props) => {
 
 	return (
 		<div className={classes.wrapper}>
-			{/* filtredCourseById.map((course) => {
+			{filtredCourseById.map((course) => {
 				<div className={classes.infoWrapper}>
 					<div className={classes.backBtnWrapper}>
 						<Link to='/courses'> &lt; Back to courses</Link>
@@ -60,9 +60,9 @@ const CourseInfo = (props) => {
 							</div>
 						</div>
 					</div>
-				</div>;
-			}) */}
-			<div className={classes.infoWrapper}>
+				</div>
+			})}
+			{/* <div className={classes.infoWrapper}>
 				<div className={classes.backBtnWrapper}>
 					<Link to='/courses'> &lt; Back to courses</Link>
 				</div>
@@ -99,6 +99,7 @@ const CourseInfo = (props) => {
 					</div>
 				</div>
 			</div>
+		</div> */}
 		</div>
 	);
 };
