@@ -60,7 +60,7 @@ const CourseInfo = (props) => {
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>;
 			})}
 			{/* <div className={classes.infoWrapper}>
 				<div className={classes.backBtnWrapper}>
