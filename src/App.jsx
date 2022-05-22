@@ -10,7 +10,6 @@ import CourseInfo from './components/CourseInfo/CourseInfo';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import store from './redux/src/store';
-import TestRedux from './components/TestRedux/TestRedux';
 
 const App = () => {
 	return (
@@ -18,7 +17,6 @@ const App = () => {
 			<Provider store={store}>
 				<BrowserRouter>
 					<Header />
-					<TestRedux />
 					<Routes>
 						<Route path='/' element={<Courses />} />
 						<Route path='/courses' element={<Courses />} />

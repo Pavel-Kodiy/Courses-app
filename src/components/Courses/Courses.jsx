@@ -2,12 +2,22 @@ import CoursesCard from './components/CourseCard/CoursesCard';
 import classes from './Courses.module.css';
 import TruncateString from 'react-truncate-string';
 import SearchBar from './components/SearchBar/SearchBar';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import CreateCourse from '../CreateCourse/CreateCourse';
-import Regisrtation from '../Registration/Registration';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 //Main data
+export async function getMockedCoursesList() {
+	const response = await axios({
+		method: 'GET',
+		url: 'http://localhost:3000/courses/all',
+	});
+	console.log(response.data.result);
+	return response.data;
+}
+getMockedCoursesList();
+
 export const mockedCoursesList = [
 	{
 		id: 'de5aaa59-90f5-4dbc-b8a9-aaf205c551ba',
